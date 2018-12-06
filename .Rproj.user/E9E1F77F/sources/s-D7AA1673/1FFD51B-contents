@@ -1,0 +1,12 @@
+
+normalize <- function(MATRIX){
+  norm_inluding_zeros <- function(x){
+    if(sum(x==0) == length(x)){
+      result <- 1
+    } else {
+      result <- norm(as.matrix(x),"F")
+    }
+    return(result)
+  }
+  apply(as.matrix(MATRIX),2,function(x){x/norm_inluding_zeros(x)})
+}

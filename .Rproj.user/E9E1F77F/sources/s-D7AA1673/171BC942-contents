@@ -1,0 +1,6 @@
+# tuckercoef function #
+
+tucker <- function(vectorA, vectorB){
+  coef <- sum(vectorA * vectorB) / sqrt(sum(vectorA^2)*sum(vectorB^2))
+  return (coef)
+}

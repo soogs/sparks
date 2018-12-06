@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1544098918801.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E7B925F8",
+    "lastKnownWriteTime" : 1544098956,
+    "last_content_update" : 1544098956901,
+    "path" : "~/Desktop/Rstudio Github/sparks/R/spca_adj.R",
+    "project_path" : "R/spca_adj.R",
+    "properties" : {
+        "cursorPosition" : "6,13",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
