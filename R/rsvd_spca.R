@@ -11,48 +11,48 @@
 #'
 #' @export
 
-softVec <- function(alpha, lambda){
-  big <- alpha > lambda
-  small <- alpha < (-1*lambda)
-  between <- (-1*lambda) <= alpha & alpha <= lambda
-
-  result <- alpha
-
-  result[big] <- result[big] - lambda
-  result[small] <- result[small] + lambda
-  result[between] <- 0
-
-  return (result)
-}
-
-scadVec <- function(alpha, lambda, gamma){
-
-  # if abs(alpha) <= 2*lambda
-  # softbig <- alpha > 2*lambda
-  # softsmall <- alpha < (-1*2*lambda)
-  softbetween <- (-2*lambda) <= alpha & alpha <= 2*lambda
-
-  # if 2lambda < abs(alpha) <= gamma * lambda
-  scadpos <- (2*lambda < alpha & alpha  <= gamma * lambda)
-  scadneg <- ((-2*lambda) > alpha & alpha  >= gamma * lambda)
-
-  # if abs(alpha) > gamma * lambda
-  scadbig <- abs(alpha) > gamma*lambda
-
-  result <- alpha
-
-  result[softbetween] <- 0
-  result[scadpos] <- ((gamma-1)*result[scadpos] - (gamma*lambda)) / (gamma - 2)
-  result[scadneg] <- ((gamma-1)*result[scadneg] + (gamma*lambda)) / (gamma - 2)
-  result[scadbig] <- result[scadbig]
-
-  return (result)
-}
-
 rsvd_spca <- function(dat, R, lambda, penalty = c("soft", "scad"),
                       ridge = 1e-6, maxiter, scadgamma,
                       inits = c("SVD", "oracle", "multistart"),
                       nrstart = NULL, oracle = NULL){
+
+  softVec <- function(alpha, lambda){
+    big <- alpha > lambda
+    small <- alpha < (-1*lambda)
+    between <- (-1*lambda) <= alpha & alpha <= lambda
+
+    result <- alpha
+
+    result[big] <- result[big] - lambda
+    result[small] <- result[small] + lambda
+    result[between] <- 0
+
+    return (result)
+  }
+
+  scadVec <- function(alpha, lambda, gamma){
+
+    # if abs(alpha) <= 2*lambda
+    # softbig <- alpha > 2*lambda
+    # softsmall <- alpha < (-1*2*lambda)
+    softbetween <- (-2*lambda) <= alpha & alpha <= 2*lambda
+
+    # if 2lambda < abs(alpha) <= gamma * lambda
+    scadpos <- (2*lambda < alpha & alpha  <= gamma * lambda)
+    scadneg <- ((-2*lambda) > alpha & alpha  >= gamma * lambda)
+
+    # if abs(alpha) > gamma * lambda
+    scadbig <- abs(alpha) > gamma*lambda
+
+    result <- alpha
+
+    result[softbetween] <- 0
+    result[scadpos] <- ((gamma-1)*result[scadpos] - (gamma*lambda)) / (gamma - 2)
+    result[scadneg] <- ((gamma-1)*result[scadneg] + (gamma*lambda)) / (gamma - 2)
+    result[scadbig] <- result[scadbig]
+
+    return (result)
+  }
 
   if((inits == "SVD" || inits == "oracle") && !is.null(nrstart)){
     stop("Cannot define nrstart while inits = SVD or oracle")
