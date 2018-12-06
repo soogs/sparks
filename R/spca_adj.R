@@ -38,7 +38,7 @@ spca_adj<-
                 }
                 x<-scale(x,center=TRUE,scale=use.corr)
               },
-              Gram = {x<-rootmatrix(x)}
+              Gram = {x<-elasticnet::rootmatrix(x)}
     )
 
     svdobj<-svd(x)
