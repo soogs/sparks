@@ -32,9 +32,13 @@ findLasso <- function(dat, zeros, R, whichfunction = c("spca_adj", "rsvd_spca"),
   while(abs(zeros - estimatedzeros) > 0 && iterOut <= maxiterOut ){
     iterOut <- iterOut + 1
 
+    # this mixes the order of the component
     mixedorder <- sample(R)
 
+    out_round_count <- 0
     for (j in mixedorder){
+      out_round_count <- out_round_count + 1
+
       iterIn <- 0
 
       up <- init
@@ -69,7 +73,7 @@ findLasso <- function(dat, zeros, R, whichfunction = c("spca_adj", "rsvd_spca"),
         print(round(lasso,10))
       }
 
-      if(j == R){
+      if(out_round_count == R){
         if(whichfunction == "spca_adj"){
           estimatedzeros <- apply((abs(fit$Wraw) < 1e-06),2,sum)
         } else {
