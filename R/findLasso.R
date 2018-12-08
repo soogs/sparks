@@ -32,7 +32,9 @@ findLasso <- function(dat, zeros, R, whichfunction = c("spca_adj", "rsvd_spca"),
   while(abs(zeros - estimatedzeros) > 0 && iterOut <= maxiterOut ){
     iterOut <- iterOut + 1
 
-    for (j in 1:R){
+    mixedorder <- sample(R)
+
+    for (j in mixedorder){
       iterIn <- 0
 
       up <- init
